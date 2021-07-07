@@ -1,43 +1,87 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export default function FoodPage(){
-   const [input, setInput] = useState("")
-const [foods, setFoods] = useState([])
-const [eatenFood, setEatenFood] = useState([])
-  
-function handleChange(event){
-event.preventDefault()
-const foodToSearchFor = event.target.value
-fetch(`https://api.edamam.com/auto-complete?app_id=51b8589f&app_key=30a061fdbd1eb6d6b3a20123b7995e1f&q=${foodToSearchFor}`)
-.then(resp=>resp.json())
-.then(setFoods)
-   }
+export default function FoodPage() {
+  const [input, setInput] = useState("")
+  const [foods, setFoods] = useState([])
+  const [eatenFood, setEatenFood] = useState([])
+  const [calories, setCalories] = useState([])
 
-   function addFood(foodItem){
-      setEatenFood(foodItem)
-      console.log(eatenFood)
-// setEatenFood([...eatenFood, foodItem])
-   }
+  function handleChangeSearch(event) {
+    setInput(event.target.value)
+  }
 
-   if (!foods) return <h1>Hold up...</h1>
-   return(
-<div className="foodPage">
-<form >
-   <input onChange={handleChange} type="text" name="foodType" value={input} placeholder="Start typing..."/>
-</form>
+  function handleChangeSelect(event) {
+    addFood(event.target.value)
+  }
 
-<ul>
-{foods.map(food=>
-<li>{food}<button onClick={addFood(food)}className="circleBtn">+</button></li>
-)}
-</ul>
+  useEffect(() => {
+    fetch(
+      `https://api.edamam.com/auto-complete?app_id=51b8589f&app_key=30a061fdbd1eb6d6b3a20123b7995e1f&q=${input}`
+    )
+      .then(resp => resp.json())
+      .then(setFoods)
+  }, [input])
 
-{/* <ul>
-{eatenFood.map(food=>
-<li>{food}</li>
-)}
-</ul> */}
-</div>
+  function addFood(foodItem) {
+    fetch(
+      `https://api.edamam.com/api/food-database/v2/parser?app_id=51b8589f&app_key=30a061fdbd1eb6d6b3a20123b7995e1f&ingr=${foodItem}&nutrition-type=logging`
+    )
+      .then(resp => resp.json())
+      .then(resp => {
+        const meal = {
+          kcal: Number(resp.parsed[0].food.nutrients.ENERC_KCAL.toFixed(0)),
+          name: foodItem,
+          quantity: 1,
+        }
+        setEatenFood([...eatenFood, meal])
+        setCalories([...calories, meal.kcal])
+      })
+  }
 
-   )
+  function getArraySum(array) {
+    let total = 0
+    for (let i in array) {
+      total += array[i]
+    }
+    return total
+  }
+
+  if (!foods) return <h1>Hold up...</h1>
+
+  return (
+    <div className="foodPage">
+      <form>
+        <input
+          onChange={handleChangeSearch}
+          type="text"
+          name="foodType"
+          value={input}
+          placeholder="Start typing..."
+        />
+      </form>
+
+      <select onChange={handleChangeSelect}>
+        <option>Select</option>
+        {foods.map(food => (
+          <option key={food} value={food} className="circleBtn">
+            {food}
+          </option>
+        ))}
+      </select>
+
+      <ul className="eatenList">
+        {eatenFood.map(meal => (
+          <li key={meal.id}>
+            <span>{meal.name}</span>
+            <input type="number" name="quanitity" value={meal.quantity} />
+            <span>{meal.kcal}</span>
+          </li>
+        ))}
+      </ul>
+      <div>
+        <span>Total:</span>
+        <span>{getArraySum(calories)}</span>
+      </div>
+    </div>
+  )
 }

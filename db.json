@@ -1,0 +1,28 @@
+{
+  "meals": [
+    {
+      "id": 1,
+      "food": "fish",
+      "kcal": 100,
+      "quantity": 1
+    }
+  ],
+  "users": [
+    {
+      "username": "Millie.mori",
+      "currentWeight": "1",
+      "goalWeight": "1",
+      "goalCalories": "1",
+      "goalFast": "1",
+      "id": 1
+    },
+    {
+      "username": "Millie.mori",
+      "currentWeight": "-2",
+      "goalWeight": "2",
+      "goalCalories": "2",
+      "goalFast": "2",
+      "id": 2
+    }
+  ]
+}
