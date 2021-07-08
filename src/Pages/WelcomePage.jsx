@@ -1,11 +1,13 @@
-import PersonalDetailsForm from '../Components/PersonalDetailsForm';
+import PersonalDetailsForm from "../Components/PersonalDetailsForm"
 
-export default function WelcomePage() {
-   return(
-      <>
-      <h1>    Welcome to Faster  </h1>
+import logo from "../images/logo.svg"
+export default function WelcomePage({ handleSubmit }) {
+  return (
+    <div>
+      <img className="logo" src={logo} />
+      <h1> Welcome to Faster </h1>
       <p>Tell us about yourself to begin</p>
-      <PersonalDetailsForm/>
-      </>
-   )
+      <PersonalDetailsForm handleSubmit={handleSubmit} />
+    </div>
+  )
 }

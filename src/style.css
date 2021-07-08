@@ -11,6 +11,10 @@ p {
   font-size: 0.7rem;
 }
 
+span {
+  font-size: 0.8rem;
+}
+
 ol,
 ul {
   padding-inline-start: 0;
@@ -19,25 +23,40 @@ ul {
 
 h1 {
   font-size: 2rem;
-  margin: 10px 0;
+  margin-top: 10px;
+}
+
+.small {
+  font-size: small;
 }
 
 .App {
   display: grid;
   padding: 20%;
   place-content: center;
-  background-color: rgb(196, 203, 209);
+  background: linear-gradient(#1d976c, #93f9b9);
+}
+
+.phone {
+  display: grid;
+  place-content: center;
+  background: black;
+  height: 620px;
+  width: 310px;
+  border-radius: 40px;
+  box-shadow: 10px 10px 11px rgba(0, 0, 0, 0.2);
+  padding-bottom: 20px;
 }
 
 .screen {
   display: grid;
-  place-content: center;
+  place-content: bottom;
   text-align: center;
-  padding: 30px;
+  padding: 20px;
   background-color: rgb(250, 250, 250);
-  height: 568px;
-  width: 320px;
-  box-shadow: lightgrey;
+  height: 528px;
+  width: 300px;
+  overflow: scroll;
 }
 
 .circleBtn {
@@ -46,35 +65,67 @@ h1 {
   background-color: darkgray;
   color: white;
   border-radius: 50%;
+  padding: 5px;
 }
 
 /* NAV  */
 
-.nav li {
-  display: inline;
-  margin: 10px 20px;
-  text-decoration: none;
-  background-color: lightgrey;
+.nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 42px;
+}
+
+.nav a {
+  background: linear-gradient(#f3f5f7, #e2e5e7);
+  border: 1px solid #e2e7e9;
+  margin: 15px 5px 0 5px;
   font-size: 0.7rem;
   padding: 6px 12px;
   border-radius: 30px;
+  box-shadow: 3px 3px 7px rgb(240, 240, 244);
+}
+
+.nav a:hover {
+  background: linear-gradient(#f3f5f7, #c9d5dd);
 }
 
 /* WELCOME FORM  */
+.logo {
+  height: 50px;
+  margin: 0 40%;
+}
+.welcomeform {
+  display: grid;
+  place-items: center;
+}
 .welcomeform label {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .welcomeform input {
   display: block;
   margin-top: 5px;
+  border: 1px solid #e2e7e9;
+  padding: 3px 8px;
 
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   border-radius: 30px;
 }
 
 .submitBtn {
-  border-radius: 30px;
+  display: grid;
+  place-content: center;
+  background: linear-gradient(#f3f5f7, #e2e5e7);
+  border: 1px solid #e2e7e9;
+  width: 100px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 5px 5px 10px rgb(240, 240, 244);
+}
+
+.submitBtn:hover {
+  background: linear-gradient(#f3f5f7, #c9d5dd);
 }
 
 /* HOME  */
@@ -88,25 +139,53 @@ h1 {
 .clock {
   display: grid;
   place-content: center;
-  background-color: lightgrey;
+  background: linear-gradient(#f3f5f7, #e2e5e7);
+  border: 1px solid #e2e7e9;
   width: 180px;
   height: 180px;
   border-radius: 50%;
+  box-shadow: 5px 5px 10px rgb(240, 240, 244);
+}
+
+.clock:hover {
+  background: linear-gradient(#f3f5f7, #c9d5dd);
 }
 
 /* FOODPAGE  */
 
+.searchBar {
+  margin-top: 5px;
+  border: 1px solid #93f9b9;
+  padding: 5px 20px;
+  width: 200px;
+  height: 30px;
+
+  margin-bottom: 5px;
+  border-radius: 30px;
+}
+
+.dropDown {
+  margin-top: 5px;
+  border: 1px solid #e2e7e9;
+  padding: 5px 20px;
+  width: 200px;
+  height: 30px;
+
+  border-radius: 30px;
+}
+
 .eatenList {
-  border-top: 1px solid rgb(209, 209, 209);
-  border-bottom: 1px solid rgb(209, 209, 209);
+  border-top: 1px solid #93f9b9;
+  border-bottom: 1px solid #93f9b9;
   padding: 12px;
 }
 
 .eatenList li {
+  text-align: left;
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 1fr 40px 35px;
   gap: 10px;
-  padding: 5px 20px;
+  padding: 5px 10px;
 }
 
 .eatenList li:hover {
@@ -116,8 +195,51 @@ h1 {
 
 /* USERPAGE */
 
-.statsSection {
+.hiUsername {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.sub3 {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.statsSection,
+.title,
+.stats {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 25px;
+  gap: 5px;
+}
+
+.statCell {
+  padding: 12px;
+}
+
+.statCell:hover {
+  background-color: rgb(238, 238, 238);
+}
+
+.statTitle {
+  font-size: 0.6rem;
+  height: 16px;
+}
+
+.statValue {
+  font-size: 1.5rem;
+}
+
+.recordStats .title {
+  margin-top: 20px;
+  border-top: 1px #93f9b9 solid;
+  border-bottom: 1px black solid;
+
+  padding: 20px 0 5px 0;
+}
+
+.recordStats .stats {
+  margin-top: 10px;
+  border-bottom: 1px rgba(201, 201, 201, 0.5) solid;
+  padding: 5px 0;
 }

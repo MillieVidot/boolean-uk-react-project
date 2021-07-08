@@ -1,59 +1,54 @@
-import { useState } from "react"
-
-export default function PersonalDetailsForm() {
-  const [personalDetails, setPersonalDetails] = useState(null)
-
-  function handleSubmit(event) {
-    event.preventDefault()
-    const data = {
-      username: event.target.username.value,
-      currentWeight: event.target.currentWeight.value,
-      goalWeight: event.target.goalWeight.value,
-      goalCalories: event.target.goalCalories.value,
-      goalFast: event.target.goalFast.value,
-    }
-
-    console.log("personalDetails", personalDetails)
-    console.log("data", data)
-    addUser(data)
-    event.target.reset()
-  }
-
-  function addUser(user) {
-    fetch("http://localhost:4000/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    })
-      .then(resp => resp.json())
-      .then(personalDetails => {
-        setPersonalDetails(personalDetails)
-      })
-      .catch(error => {
-        console.error("Error:", error)
-      })
-  }
-
+export default function PersonalDetailsForm({ handleSubmit }) {
   return (
     <form onSubmit={handleSubmit} className="welcomeform">
       <label>
-        <input type="text" name="username" placeholder="Username" required />
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          maxLength={12}
+          required
+        />
       </label>
       <label>
         Current Weight
-        <input type="number" name="currentWeight" placeholder="Kg" required />
+        <input
+          type="number"
+          name="currentWeight"
+          placeholder="Kg"
+          min="40"
+          required
+        />
       </label>
       <label>
         Goal Weight
-        <input type="number" name="goalWeight" placeholder="Kg" required />
+        <input
+          type="number"
+          name="goalWeight"
+          placeholder="Kg"
+          min="40"
+          required
+        />
       </label>
       <label>
         Goal Calories
-        <input type="number" name="goalCalories" placeholder="Kg" required />
+        <input
+          type="number"
+          name="goalCalories"
+          placeholder="Kg"
+          min="800"
+          required
+        />
       </label>
       <label>
         Goal Fast
-        <input type="number" name="goalFast" placeholder="hrs" required />
+        <input
+          type="number"
+          name="goalFast"
+          placeholder="hrs"
+          min="8"
+          required
+        />
       </label>
       <input className="submitBtn" type="submit" />
     </form>

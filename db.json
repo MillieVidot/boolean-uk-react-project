@@ -1,28 +1,58 @@
 {
   "meals": [
     {
-      "id": 1,
-      "food": "fish",
-      "kcal": 100,
-      "quantity": 1
+      "kcal": 44,
+      "name": "potato",
+      "quantity": 1,
+      "id": 8
+    },
+    {
+      "kcal": 266,
+      "name": "potato bun",
+      "quantity": 1,
+      "id": 9
+    },
+    {
+      "kcal": 117,
+      "name": "lox",
+      "quantity": 1,
+      "id": 10
+    },
+    {
+      "kcal": 42,
+      "name": "pea pod",
+      "quantity": 1,
+      "id": 13
+    },
+    {
+      "kcal": 224,
+      "name": "peach pie",
+      "quantity": 1,
+      "id": 14
+    },
+    {
+      "kcal": 224,
+      "name": "peach pie",
+      "quantity": 1,
+      "id": 20
     }
   ],
   "users": [
     {
-      "username": "Millie.mori",
-      "currentWeight": "1",
-      "goalWeight": "1",
-      "goalCalories": "1",
-      "goalFast": "1",
+      "username": "Millie",
+      "currentWeight": "60",
+      "goalWeight": "55",
+      "goalCalories": "2000",
+      "goalFast": "18",
       "id": 1
-    },
+    }
+  ],
+  "log": [
     {
-      "username": "Millie.mori",
-      "currentWeight": "-2",
-      "goalWeight": "2",
-      "goalCalories": "2",
-      "goalFast": "2",
-      "id": 2
+      "day": "Wednesday",
+      "fast": "19:31",
+      "kcal": 1234,
+      "id": 1
     }
   ]
 }

@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react"
 
-export default function FoodPage() {
+export default function FoodPage({
+  calories,
+  setCalories,
+  getTotalCalories,
+  meals,
+  setMeals,
+}) {
   const [input, setInput] = useState("")
   const [foods, setFoods] = useState([])
   const [eatenFood, setEatenFood] = useState([])
-  const [calories, setCalories] = useState([])
+  // const [meals, setMeals] = useState([])
 
   function handleChangeSearch(event) {
     setInput(event.target.value)
@@ -23,6 +29,7 @@ export default function FoodPage() {
   }, [input])
 
   function addFood(foodItem) {
+    // this takes in food item from drop down
     fetch(
       `https://api.edamam.com/api/food-database/v2/parser?app_id=51b8589f&app_key=30a061fdbd1eb6d6b3a20123b7995e1f&ingr=${foodItem}&nutrition-type=logging`
     )
@@ -33,34 +40,42 @@ export default function FoodPage() {
           name: foodItem,
           quantity: 1,
         }
-        setEatenFood([...eatenFood, meal])
-        setCalories([...calories, meal.kcal])
+        // setEatenFood([...eatenFood, meal])
+        // setCalories([...calories, meal.kcal])
+        addMealToServer(meal)
       })
   }
 
-  function getArraySum(array) {
-    let total = 0
-    for (let i in array) {
-      total += array[i]
-    }
-    return total
+  function addMealToServer(meal) {
+    fetch("http://localhost:4000/meals", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(meal),
+    })
+      .then(resp => resp.json())
+      .then(meal => {
+        setMeals([...meals, meal])
+      })
+      .catch(error => {
+        console.error("Error:", error)
+      })
   }
 
   if (!foods) return <h1>Hold up...</h1>
-
   return (
     <div className="foodPage">
       <form>
         <input
+          className="searchBar"
           onChange={handleChangeSearch}
           type="text"
           name="foodType"
           value={input}
-          placeholder="Start typing..."
+          placeholder="Search..."
         />
       </form>
 
-      <select onChange={handleChangeSelect}>
+      <select className="dropDown" onChange={handleChangeSelect}>
         <option>Select</option>
         {foods.map(food => (
           <option key={food} value={food} className="circleBtn">
@@ -70,7 +85,7 @@ export default function FoodPage() {
       </select>
 
       <ul className="eatenList">
-        {eatenFood.map(meal => (
+        {meals.map(meal => (
           <li key={meal.id}>
             <span>{meal.name}</span>
             <input type="number" name="quanitity" value={meal.quantity} />
@@ -78,10 +93,10 @@ export default function FoodPage() {
           </li>
         ))}
       </ul>
-      <div>
-        <span>Total:</span>
-        <span>{getArraySum(calories)}</span>
-      </div>
+      <h3>
+        <span>Total: </span>
+        <span>{getTotalCalories()}</span>
+      </h3>
     </div>
   )
 }
