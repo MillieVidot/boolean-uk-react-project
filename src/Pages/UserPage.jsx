@@ -57,7 +57,7 @@ export default function UserPage({ personalDetails }) {
           {logs.map(log => (
             <li key={log.id} className="stats">
               <span>{log.day}</span>
-              <span>10:22</span>
+              <span>{log.fast}</span>
               <span>{log.kcal}</span>
             </li>
           ))}

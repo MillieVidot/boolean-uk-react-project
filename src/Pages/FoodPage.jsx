@@ -98,7 +98,7 @@ export default function FoodPage({
     const day = getDate()
     const log = {
       day: day,
-      fast: "19:31",
+      fast: "10:22",
       kcal: calories,
     }
     fetch("http://localhost:4000/logs", {

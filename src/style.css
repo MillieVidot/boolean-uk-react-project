@@ -3,6 +3,14 @@
   box-sizing: border-box;
 }
 
+.red {
+  color: red;
+}
+
+.green {
+  color: #1d976c;
+}
+
 a {
   text-decoration: none;
   color: black;

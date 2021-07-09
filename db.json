@@ -2,32 +2,26 @@
   "meals": [],
   "users": [
     {
-      "username": "Simon",
-      "currentWeight": "100",
-      "goalWeight": "80",
-      "goalCalories": "2000",
-      "goalFast": "10",
+      "username": "Millie",
+      "currentWeight": "60",
+      "goalWeight": "55",
+      "goalCalories": "2050",
+      "goalFast": "19",
       "id": 1
     }
   ],
   "logs": [
     {
       "day": "Wednesday",
-      "fast": "19:31",
-      "kcal": 1234,
-      "id": 3
+      "fast": "21:32",
+      "kcal": 2233,
+      "id": 1
     },
     {
       "day": "Thursday",
-      "fast": "19:31",
-      "kcal": 1551,
+      "fast": "18:55",
+      "kcal": 2105,
       "id": 2
-    },
-    {
-      "day": "Friday",
-      "fast": "19:31",
-      "kcal": 44,
-      "id": 4
     }
   ]
 }
