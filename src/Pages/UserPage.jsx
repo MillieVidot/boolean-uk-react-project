@@ -47,7 +47,6 @@ export default function UserPage({ personalDetails, getTotalCalories }) {
       </div>
       <div className="recordStats">
         <div className="title">
-          {" "}
           <h4>Day</h4>
           <h4>Fast</h4>
           <h4>kcal</h4>

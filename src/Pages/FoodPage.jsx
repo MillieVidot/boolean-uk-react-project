@@ -9,8 +9,6 @@ export default function FoodPage({
 }) {
   const [input, setInput] = useState("")
   const [foods, setFoods] = useState([])
-  const [eatenFood, setEatenFood] = useState([])
-  // const [meals, setMeals] = useState([])
 
   function handleChangeSearch(event) {
     setInput(event.target.value)
@@ -40,8 +38,6 @@ export default function FoodPage({
           name: foodItem,
           quantity: 1,
         }
-        // setEatenFood([...eatenFood, meal])
-        // setCalories([...calories, meal.kcal])
         addMealToServer(meal)
       })
   }
@@ -61,9 +57,37 @@ export default function FoodPage({
       })
   }
 
+  function deleteMeal(mealToDelete) {
+    fetch(`http://localhost:4000/meals/${mealToDelete.id}`, {
+      method: "DELETE",
+    }).then(() => {
+      setMeals(meals.filter(meal => meal.id !== mealToDelete.id))
+    })
+  }
+
+  function upQuantity(mealToIncrease) {
+    fetch(`http://localhost:4000/meals/${mealToIncrease.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ quantity: mealToIncrease.quantity + 1 }),
+    })
+      .then(resp => resp.json())
+      .then(mealReturnFromServer => {
+        setMeals(
+          meals.map(target => {
+            if (target.id === mealReturnFromServer.id)
+              return mealReturnFromServer
+            return target
+          })
+        )
+      })
+    // START HERE <<<<<<<
+  }
+
   if (!foods) return <h1>Hold up...</h1>
   return (
     <div className="foodPage">
+      <h3 className="sub3">Add Meals</h3>
       <form>
         <input
           className="searchBar"
@@ -83,20 +107,49 @@ export default function FoodPage({
           </option>
         ))}
       </select>
-
       <ul className="eatenList">
+        <li className="statTitle">
+          <span>Del</span>
+          <span>Meal</span>
+          <span>Qty</span>
+          <span>kcal</span>
+        </li>
         {meals.map(meal => (
           <li key={meal.id}>
+            <button
+              onClick={() => {
+                deleteMeal(meal)
+              }}
+              className="deleteBtn"
+            >
+              ✖️
+            </button>
             <span>{meal.name}</span>
-            <input type="number" name="quanitity" value={meal.quantity} />
+            <input
+              onChange={() => {
+                upQuantity(meal)
+              }}
+              className="mealQuantity"
+              type="number"
+              name="quanitity"
+              value={meal.quantity}
+            />
             <span>{meal.kcal}</span>
           </li>
         ))}
       </ul>
-      <h3>
-        <span>Total: </span>
-        <span>{getTotalCalories()}</span>
-      </h3>
+      <div className="">
+        <h3>
+          <span>Total: </span>
+          <span>{getTotalCalories()}</span>
+        </h3>
+        <button
+          onClick={() => console.log("Let's start fasting!")}
+          className="startFastBtn"
+        >
+          Submit total
+        </button>
+      </div>
     </div>
   )
 }

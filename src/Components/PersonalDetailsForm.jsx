@@ -17,6 +17,7 @@ export default function PersonalDetailsForm({ handleSubmit }) {
           name="currentWeight"
           placeholder="Kg"
           min="40"
+          step="0.5"
           required
         />
       </label>
@@ -27,6 +28,7 @@ export default function PersonalDetailsForm({ handleSubmit }) {
           name="goalWeight"
           placeholder="Kg"
           min="40"
+          step="0.5"
           required
         />
       </label>
@@ -37,6 +39,7 @@ export default function PersonalDetailsForm({ handleSubmit }) {
           name="goalCalories"
           placeholder="Kg"
           min="800"
+          step="50"
           required
         />
       </label>
@@ -47,6 +50,7 @@ export default function PersonalDetailsForm({ handleSubmit }) {
           name="goalFast"
           placeholder="hrs"
           min="8"
+          step="0.5"
           required
         />
       </label>

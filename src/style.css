@@ -183,14 +183,21 @@ h1 {
 .eatenList li {
   text-align: left;
   display: grid;
-  grid-template-columns: 1fr 40px 35px;
+  align-items: center;
+  grid-template-columns: 20px 1fr 40px 35px;
   gap: 10px;
-  padding: 5px 10px;
+  padding: 5px 5px;
 }
 
 .eatenList li:hover {
   background-color: rgb(238, 238, 238);
   border-radius: 25px;
+}
+
+.deleteBtn,
+.mealQuantity {
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
 }
 
 /* USERPAGE */
@@ -205,6 +212,12 @@ h1 {
   margin-bottom: 20px;
 }
 
+.statsSection {
+  border-top: 1px #93f9b9 solid;
+  border-bottom: 1px #93f9b9 solid;
+  padding: 10px 0;
+}
+
 .statsSection,
 .title,
 .stats {
@@ -214,7 +227,7 @@ h1 {
 }
 
 .statCell {
-  padding: 12px;
+  padding: 8px;
 }
 
 .statCell:hover {
@@ -223,7 +236,8 @@ h1 {
 
 .statTitle {
   font-size: 0.6rem;
-  height: 16px;
+  color: rgb(156, 156, 156);
+  height: 18px;
 }
 
 .statValue {
@@ -232,7 +246,7 @@ h1 {
 
 .recordStats .title {
   margin-top: 20px;
-  border-top: 1px #93f9b9 solid;
+  /* border-top: 1px #93f9b9 solid; */
   border-bottom: 1px black solid;
 
   padding: 20px 0 5px 0;

@@ -3,47 +3,29 @@
     {
       "kcal": 44,
       "name": "potato",
-      "quantity": 1,
+      "quantity": 4,
       "id": 8
     },
     {
-      "kcal": 266,
-      "name": "potato bun",
-      "quantity": 1,
-      "id": 9
-    },
-    {
-      "kcal": 117,
-      "name": "lox",
-      "quantity": 1,
-      "id": 10
-    },
-    {
-      "kcal": 42,
-      "name": "pea pod",
-      "quantity": 1,
-      "id": 13
-    },
-    {
       "kcal": 224,
       "name": "peach pie",
-      "quantity": 1,
-      "id": 14
-    },
-    {
-      "kcal": 224,
-      "name": "peach pie",
-      "quantity": 1,
+      "quantity": 11,
       "id": 20
+    },
+    {
+      "kcal": 57,
+      "name": "pear",
+      "quantity": 9,
+      "id": 21
     }
   ],
   "users": [
     {
-      "username": "Millie",
-      "currentWeight": "60",
-      "goalWeight": "55",
-      "goalCalories": "2000",
-      "goalFast": "18",
+      "username": "Millie.mori",
+      "currentWeight": "40.5",
+      "goalWeight": "40.5",
+      "goalCalories": "850",
+      "goalFast": "8.5",
       "id": 1
     }
   ],
