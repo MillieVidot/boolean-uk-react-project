@@ -69,6 +69,13 @@ function App() {
       .then(setMeals)
   }, [])
 
+  function getDate() {
+    var newDate = new Date()
+    var weekday = newDate.getDay()
+    var options = { weekday: "long" }
+    return new Intl.DateTimeFormat("en-UK", options).format(newDate)
+  }
+
   return (
     <div className="App">
       <div className="phone">
@@ -91,6 +98,7 @@ function App() {
                 getTotalCalories={getTotalCalories}
                 meals={meals}
                 setMeals={setMeals}
+                getDate={getDate}
               />
               <Nav />
             </Route>

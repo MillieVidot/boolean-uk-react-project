@@ -19,6 +19,7 @@ ol,
 ul {
   padding-inline-start: 0;
   margin: 20px 0;
+  list-style: none;
 }
 
 h1 {
@@ -198,6 +199,28 @@ h1 {
 .mealQuantity {
   background-color: rgba(255, 255, 255, 0);
   border: 0;
+}
+
+.bottomSection {
+  display: grid;
+  place-content: center;
+  gap: 10px;
+}
+
+.startFastBtn {
+  display: grid;
+  place-content: center;
+  background: linear-gradient(#f3f5f7, #e2e5e7);
+  border: 1px solid #93f9b9;
+  width: 200px;
+  height: 40px;
+  border-radius: 30px;
+  box-shadow: 5px 5px 10px rgb(240, 240, 244);
+  font-size: 0.8rem;
+}
+
+.startFastBtn:hover {
+  background: linear-gradient(#f3f5f7, #c9d5dd);
 }
 
 /* USERPAGE */

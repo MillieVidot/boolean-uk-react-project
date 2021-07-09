@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
 
-export default function UserPage({ personalDetails, getTotalCalories }) {
-  function getDate() {
-    var newDate = new Date()
-    var weekday = newDate.getDay()
-    var options = { weekday: "long" }
-    return new Intl.DateTimeFormat("en-UK", options).format(newDate)
-  }
+export default function UserPage({ personalDetails }) {
+  const [logs, setLogs] = useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:4000/logs")
+      .then(resp => resp.json())
+      .then(setLogs)
+  }, [])
 
   if (!personalDetails) return <h1>Hold up...</h1>
 
@@ -42,7 +44,7 @@ export default function UserPage({ personalDetails, getTotalCalories }) {
         </div>
         <div className="statCell">
           <h4 className="statTitle">Goals Won</h4>
-          <span className="statValue">31</span>
+          <span className="statValue">{logs.length}</span>
         </div>
       </div>
       <div className="recordStats">
@@ -51,11 +53,15 @@ export default function UserPage({ personalDetails, getTotalCalories }) {
           <h4>Fast</h4>
           <h4>kcal</h4>
         </div>
-        <div className="stats">
-          <span>{getDate()}</span>
-          <span>10:22</span>
-          <span>{getTotalCalories()}</span>
-        </div>
+        <ul>
+          {logs.map(log => (
+            <li key={log.id} className="stats">
+              <span>{log.day}</span>
+              <span>10:22</span>
+              <span>{log.kcal}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )

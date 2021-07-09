@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 export default function FoodPage({
-  calories,
-  setCalories,
   getTotalCalories,
   meals,
   setMeals,
+  getDate,
 }) {
   const [input, setInput] = useState("")
   const [foods, setFoods] = useState([])
+  const [logs, setLogs] = useState([])
 
   function handleChangeSearch(event) {
     setInput(event.target.value)
@@ -65,11 +66,15 @@ export default function FoodPage({
     })
   }
 
-  function upQuantity(mealToIncrease) {
-    fetch(`http://localhost:4000/meals/${mealToIncrease.id}`, {
+  function handleChangeQty(id, event) {
+    changeQty(id, Number(event.target.value))
+  }
+
+  function changeQty(id, value) {
+    fetch(`http://localhost:4000/meals/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ quantity: mealToIncrease.quantity + 1 }),
+      body: JSON.stringify({ quantity: value }),
     })
       .then(resp => resp.json())
       .then(mealReturnFromServer => {
@@ -81,7 +86,46 @@ export default function FoodPage({
           })
         )
       })
-    // START HERE <<<<<<<
+  }
+
+  function handleSubmitTotal() {
+    console.log("Let's start fasting!")
+    logData()
+  }
+
+  function logData() {
+    const calories = getTotalCalories()
+    const day = getDate()
+    const log = {
+      day: day,
+      fast: "19:31",
+      kcal: calories,
+    }
+    fetch("http://localhost:4000/logs", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(log),
+    })
+      .then(resp => resp.json())
+      .then(log => {
+        setLogs([...logs, log])
+      })
+      .catch(error => {
+        console.error("Error:", error)
+      })
+
+    console.log("data is logged", log)
+    wipeTodaysMeals()
+  }
+
+  function wipeTodaysMeals() {
+    for (const meal of meals) {
+      fetch(`http://localhost:4000/meals/${meal.id}`, {
+        method: "DELETE",
+      })
+        .then(setMeals([]))
+        .then(console.log)
+    }
   }
 
   if (!foods) return <h1>Hold up...</h1>
@@ -126,8 +170,8 @@ export default function FoodPage({
             </button>
             <span>{meal.name}</span>
             <input
-              onChange={() => {
-                upQuantity(meal)
+              onChange={event => {
+                handleChangeQty(meal.id, event)
               }}
               className="mealQuantity"
               type="number"
@@ -138,17 +182,18 @@ export default function FoodPage({
           </li>
         ))}
       </ul>
-      <div className="">
+      <div className="bottomSection">
         <h3>
           <span>Total: </span>
           <span>{getTotalCalories()}</span>
         </h3>
-        <button
-          onClick={() => console.log("Let's start fasting!")}
+        <Link
+          to="/userpage"
+          onClick={handleSubmitTotal}
           className="startFastBtn"
         >
-          Submit total
-        </button>
+          Submit Today's Meals
+        </Link>
       </div>
     </div>
   )
